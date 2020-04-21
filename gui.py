@@ -8,6 +8,12 @@ from putawayinv import updateinv
 from delete import deleteinv
 from insertinv import insertinv
 from addorder import addorder
+from updatelines import updatelines
+from updateorder import updateorder
+from vieworders import openorders
+from insertinvoice import insertinvoice
+from viewinvoices import viewinvoices
+from payinvoices import payinvoices
 
 
 
@@ -21,6 +27,7 @@ def main():
     window = Tk()
 
     window.title("Welcome to the gameshop system")
+    window.geometry("640x640")
 
 
     #INSERT item
@@ -55,12 +62,28 @@ def main():
     addorderbtn = Button(window, text ="Add a New Order/Add Lines", command = addorder)
     addorderbtn.pack()
 
-    #delete order
+    updatelinesbtn = Button(window, text ="Update Existing Lines", command =updatelines)
+    updatelinesbtn.pack()
 
     #mark orders as in transit or as recieved (update)
+    updateordersbtn = Button(window, text= "Update Order Header", command =updateorder)
+    updateordersbtn.pack()
 
-    #view Orders in transit
+    #view Orders
+    updateordersbtn = Button(window, text="View Open Orders", command=openorders)
+    updateordersbtn.pack()
 
+    #insertinvoice
+    insertinvoicebtn = Button(window, text="Log Invoices", command=insertinvoice)
+    insertinvoicebtn.pack()
+
+    #viewinvoices
+    viewinvoicesbtn = Button(window, text="Query Invoices", command =viewinvoices)
+    viewinvoicesbtn.pack()
+
+    #payinvoices
+    payinvoicebtn = Button(window, text="Pay Invoices", command = payinvoices)
+    payinvoicebtn.pack()
 
 
     window.mainloop()

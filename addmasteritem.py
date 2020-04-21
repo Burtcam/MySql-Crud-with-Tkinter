@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter.ttk import Combobox
 import pymysql as mdb
 from Errordialog import *
+from datetime import datetime
 #TODO add more error handling
 
 def getvendors():
@@ -64,9 +65,12 @@ def additem():
 
     def runinsertquery():
         # learn how to build a query that will send it to the DB and if successful reponds
-
+        now = datetime.now()
+        formatted_date = now.strftime('%Y-%m-%d %H:%M:%S')
+        formatted_date = "'" + formatted_date + "'"
         # bbuild string
-        string = "Insert into masteritem (itemID,cost,vendorID) VALUES (" + "'" + newitemId.get() +"', '" + newcost.get() + "', '" + vendor.get() +"');"
+        string = "Insert into masteritem (itemID,cost,vendorID, intialPurchaseDate) VALUES (" + "'" + newitemId.get() +"', '" + newcost.get() + "', '" + vendor.get() +"'," + formatted_date +");"
+        print(string)
         con = mdb.connect('localhost', 'root', 'CSC436!', 'gameshop');
 
         try:

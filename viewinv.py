@@ -26,7 +26,7 @@ def viewinv():
     window.title("View Inventory")
 
     result = getinv()
-    print(result)
+   # print(result)
     tree = Treeview(window, columns=('Record Num','Item ID', 'On Hand', 'Location'), show='headings')
     tree.heading('Record Num', text = "Record Number")
     tree.heading('Item ID', text = "Item ID")

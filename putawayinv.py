@@ -91,13 +91,11 @@ def updateinv():
 
 
         #2. determine what is there to change
-        try:
-            if location == "":
-                location = result[3]
-            if item == "":
-                item = result[1]
-        except IndexError:
-            err = error()
+
+        if location is "":
+            location = result[0][3]
+        if item is "":
+            item = result[0][1]
 
 
         query = "UPDATE inventory SET location = '" + location + "' ,onhand = " + str(qty) + " ,itemID = '" + item + "' WHERE recordnum = " + str(rec) +";"

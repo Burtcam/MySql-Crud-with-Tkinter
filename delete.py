@@ -34,7 +34,6 @@ def deleteinv():
         except:
             recnum.delete(0, END)
             fail = error()
-            window.destroy()
         #success
     def no():
         recnum.delete(0,END)
@@ -47,7 +46,7 @@ def deleteinv():
         window = Tk()
         window.title("Confirm Deletetion?")
 
-        print(result)
+       # print(result)
         tree = Treeview(window, columns=('Record Num', 'Item ID', 'On Hand', 'Location'), show='headings')
         tree.heading('Record Num', text="Record Number")
         tree.heading('Item ID', text="Item ID")

@@ -26,7 +26,7 @@ def getordercost(orderid):
 
 def costget(item, vendor):
     string = "select cost from masteritem where itemID = " +item +"and vendorId = " + vendor +";"
-    print(string)
+    #print(string)
     con = mdb.connect('localhost', 'root', 'CSC436!', 'gameshop');
 
     # With will close the connection after the code is done,
@@ -39,7 +39,7 @@ def costget(item, vendor):
         # Returns a tuple of tuples, with each inner tupple being one row
         result = cur.fetchall()
     con.close()
-    print(result[0][0])
+    #print(result[0][0])
     return result[0][0]
 
 def findorder():
@@ -211,7 +211,7 @@ def addorder():
 
             #update cost of order header
                 orderheadercost = getordercost(orderID)
-                print(orderheadercost)
+               # print(orderheadercost)
                 orderheadercost = orderheadercost + cost
                 string = "update orderheader SET cost = " + str(orderheadercost) + "where orderID = " + str(orderID) + ";"
                 con = mdb.connect('localhost', 'root', 'CSC436!', 'gameshop')
@@ -291,7 +291,7 @@ def addorder():
                 # push line info clear line input
 
                 string = "INSERT into lineitem (itemID, quantity, lineid, orderID, cost) VALUES (" + "'"+str(item.get())+"'," + str(qty.get()) + "," + str(lineid) + "," + str(orderid) + "," + str(cost) + ");"
-                print (string)
+                #print (string)
                 con = mdb.connect('localhost', 'root', 'CSC436!', 'gameshop')
 
                 # With will close the connection after the code is done,
@@ -306,7 +306,7 @@ def addorder():
 
                 # update cost of order header
                 orderheadercost = getordercost(orderid)
-                print(orderheadercost)
+               # print(orderheadercost)
                 orderheadercost = orderheadercost + cost
                 string = "update orderheader SET cost = " + str(orderheadercost) + "where orderID = " + str(
                     orderid) + ";"

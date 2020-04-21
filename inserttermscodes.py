@@ -38,7 +38,7 @@ def addatermscode():
         termscodes = "'" + termscode.get() + "'"
         discountamt = "'" + str(discount.get()) + "'"
         disc = discount.get()
-        print(disc)
+        #print(disc)
         daystoearn = "'" +str(days.get())+"'"
         allowanceamt  = "'" + str(allowance.get()) + "'"
 
