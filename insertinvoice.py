@@ -4,6 +4,7 @@ import pymysql as mdb
 from Errordialog import *
 from addmasteritem import getvendors
 from datetime import datetime
+from python_mysql_dbconfig import read_db_config
 
 def insertinvoice():
 
@@ -71,8 +72,9 @@ def insertinvoice():
         #VALUES(value1, value2, value3, ...);
         string = "Insert into masterinvoice(datereceived,paymentduedate,grossamount,vendorID) VALUES("+formatted_date+","+datestring+","+str(amt.get()) +", '" +vendor.get() +"');"
 
-        print(string)
-        con = mdb.connect('localhost', 'root', 'CSC436!', 'gameshop');
+        connectionstring = read_db_config()
+        con = mdb.connect(connectionstring.get('host'), connectionstring.get('user'), connectionstring.get('password'),
+                          connectionstring.get('database'))
         try:
             with con:
                 cur = con.cursor()

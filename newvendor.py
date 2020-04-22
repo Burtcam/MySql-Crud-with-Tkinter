@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter.ttk import Combobox
 import pymysql as mdb
 from Errordialog import *
+from python_mysql_dbconfig import read_db_config
 
 
 
@@ -9,7 +10,9 @@ def getterms():
 
     query = "SELECT termsID FROM termscodes"
 
-    con = mdb.connect('localhost', 'root', 'CSC436!', 'gameshop');
+    connectionstring = read_db_config()
+    con = mdb.connect(connectionstring.get('host'), connectionstring.get('user'), connectionstring.get('password'),
+                      connectionstring.get('database'))
 
     # With will close the connection after the code is done,
     # regardless of how the code exists. Use as an alternative to 'finally' statement
@@ -98,7 +101,9 @@ def addvendor():
         terms = "'"+termscombo.get()+"'"
 
         query = "Insert into mastervendor (vendorId,contactName,vendorName, country, state, zip, address, termsID) VALUES (" + vendorid + "," + contactname + "," +vendor + "," + countrycode + "," +state + ", " + zipcode + ", " + add + ", " + terms +");"
-        con = mdb.connect('localhost', 'root', 'CSC436!', 'gameshop');
+        connectionstring = read_db_config()
+        con = mdb.connect(connectionstring.get('host'), connectionstring.get('user'), connectionstring.get('password'),
+                          connectionstring.get('database'))
         try:
             with con:
                 cur = con.cursor()

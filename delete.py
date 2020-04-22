@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter.ttk import Combobox, Treeview
 import pymysql as mdb
 from Errordialog import *
+from python_mysql_dbconfig import read_db_config
 
 
 
@@ -21,7 +22,9 @@ def deleteinv():
     def yes():
         #run delete DELETE FROM table_name WHERE condition;
         string = "DELETE from inventory where recordnum = " + str(recnum.get()) + ";"
-        con = mdb.connect('localhost', 'root', 'CSC436!', 'gameshop');
+        connectionstring = read_db_config()
+        con = mdb.connect(connectionstring.get('host'), connectionstring.get('user'), connectionstring.get('password'),
+                          connectionstring.get('database'))
         try:
             with con:
                 cur = con.cursor()
@@ -68,7 +71,9 @@ def deleteinv():
         #get data
         query  = "Select * from inventory where recordnum =" + str(recnum.get()) + ";"
 
-        con = mdb.connect('localhost', 'root', 'CSC436!', 'gameshop');
+        connectionstring = read_db_config()
+        con = mdb.connect(connectionstring.get('host'), connectionstring.get('user'), connectionstring.get('password'),
+                          connectionstring.get('database'))
 
         with con:
             cur = con.cursor()

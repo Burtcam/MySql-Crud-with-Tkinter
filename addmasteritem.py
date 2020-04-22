@@ -3,13 +3,15 @@ from tkinter.ttk import Combobox
 import pymysql as mdb
 from Errordialog import *
 from datetime import datetime
-#TODO add more error handling
+from python_mysql_dbconfig import read_db_config
 
 def getvendors():
 
     query = "SELECT vendorID FROM mastervendor"
 
-    con = mdb.connect('localhost', 'root', 'CSC436!', 'gameshop');
+    connectionstring = read_db_config()
+    con = mdb.connect(connectionstring.get('host'), connectionstring.get('user'), connectionstring.get('password'),
+                      connectionstring.get('database'))
 
     # With will close the connection after the code is done,
     # regardless of how the code exists. Use as an alternative to 'finally' statement
@@ -70,8 +72,8 @@ def additem():
         formatted_date = "'" + formatted_date + "'"
         # bbuild string
         string = "Insert into masteritem (itemID,cost,vendorID, intialPurchaseDate) VALUES (" + "'" + newitemId.get() +"', '" + newcost.get() + "', '" + vendor.get() +"'," + formatted_date +");"
-        print(string)
-        con = mdb.connect('localhost', 'root', 'CSC436!', 'gameshop');
+        connectionstring = read_db_config()
+        con = mdb.connect(connectionstring.get('host'), connectionstring.get('user'), connectionstring.get('password'), connectionstring.get('database'));
 
         try:
             with con:

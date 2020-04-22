@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter.ttk import Combobox
 import pymysql as mdb
 from Errordialog import *
+from python_mysql_dbconfig import read_db_config
 
 
 
@@ -9,7 +10,9 @@ def getitems():
 
     query = "SELECT itemID FROM masteritem"
 
-    con = mdb.connect('localhost', 'root', 'CSC436!', 'gameshop');
+    connectionstring = read_db_config()
+    con = mdb.connect(connectionstring.get('host'), connectionstring.get('user'), connectionstring.get('password'),
+                      connectionstring.get('database'))
 
     # With will close the connection after the code is done,
     # regardless of how the code exists. Use as an alternative to 'finally' statement
@@ -27,7 +30,9 @@ def getline(x):
 
     query = "SELECT * FROM inventory where recordnum =" + str(x) + ";"
 
-    con = mdb.connect('localhost', 'root', 'CSC436!', 'gameshop')
+    connectionstring = read_db_config()
+    con = mdb.connect(connectionstring.get('host'), connectionstring.get('user'), connectionstring.get('password'),
+                      connectionstring.get('database'))
 
     # With will close the connection after the code is done,
     # regardless of how the code exists. Use as an alternative to 'finally' statement
@@ -100,7 +105,9 @@ def updateinv():
 
         query = "UPDATE inventory SET location = '" + location + "' ,onhand = " + str(qty) + " ,itemID = '" + item + "' WHERE recordnum = " + str(rec) +";"
         #Actually build the string and run it
-        con = mdb.connect('localhost', 'root', 'CSC436!', 'gameshop');
+        connectionstring = read_db_config()
+        con = mdb.connect(connectionstring.get('host'), connectionstring.get('user'), connectionstring.get('password'),
+                          connectionstring.get('database'))
         try:
             with con:
                 cur = con.cursor()

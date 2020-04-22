@@ -2,12 +2,14 @@ from tkinter import *
 from tkinter.ttk import Combobox
 import pymysql as mdb
 from Errordialog import *
+from python_mysql_dbconfig import read_db_config
 
 def getline(orderid, lineid):
     string = "SELECT * from lineitem where orderid = " +str(orderid) + " and lineID =" +str(lineid) +";"
-    #print(string)
 
-    con = mdb.connect('localhost', 'root', 'CSC436!', 'gameshop');
+    connectionstring = read_db_config()
+    con = mdb.connect(connectionstring.get('host'), connectionstring.get('user'), connectionstring.get('password'),
+                      connectionstring.get('database'))
 
     # With will close the connection after the code is done,
     # regardless of how the code exists. Use as an alternative to 'finally' statement
@@ -25,7 +27,9 @@ def getline(orderid, lineid):
 def costrecalc(orderid):
     #SELECT sum(cost) from lineitem where orderID = 36;
     string = "Select sum(cost) from lineitem where orderID = " + str(orderid) + ";"
-    con = mdb.connect('localhost', 'root', 'CSC436!', 'gameshop')
+    connectionstring = read_db_config()
+    con = mdb.connect(connectionstring.get('host'), connectionstring.get('user'), connectionstring.get('password'),
+                      connectionstring.get('database'))
 
     # With will close the connection after the code is done,
     # regardless of how the code exists. Use as an alternative to 'finally' statement
@@ -39,7 +43,9 @@ def costrecalc(orderid):
     con.close()
     #update orderheader set cost = BLANK where orderID = BLANK
     string = "update orderheader set cost = " +str(result[0][0]) + "where orderID = " + str(orderid) + ";"
-    con = mdb.connect('localhost', 'root', 'CSC436!', 'gameshop');
+    connectionstring = read_db_config()
+    con = mdb.connect(connectionstring.get('host'), connectionstring.get('user'), connectionstring.get('password'),
+                      connectionstring.get('database'))
 
     # With will close the connection after the code is done,
     # regardless of how the code exists. Use as an alternative to 'finally' statement
@@ -59,7 +65,9 @@ def costget(item, vendor):
     item = "'" +item + "'"
     string = "select cost from masteritem where itemID = " + item + " and vendorId = " + vendor + ";"
     #print(string)
-    con = mdb.connect('localhost', 'root', 'CSC436!', 'gameshop');
+    connectionstring = read_db_config()
+    con = mdb.connect(connectionstring.get('host'), connectionstring.get('user'), connectionstring.get('password'),
+                      connectionstring.get('database'))
 
     # With will close the connection after the code is done,
      # regardless of how the code exists. Use as an alternative to 'finally' statement
@@ -80,7 +88,9 @@ def getvendor(orderid):
     #select vendorID from orderheader where orderID = 36;
     string = "SELECT vendorID from orderheader where orderID = " +str(orderid) + ";"
 
-    con = mdb.connect('localhost', 'root', 'CSC436!', 'gameshop');
+    connectionstring = read_db_config()
+    con = mdb.connect(connectionstring.get('host'), connectionstring.get('user'), connectionstring.get('password'),
+                      connectionstring.get('database'))
 
     # With will close the connection after the code is done,
     # regardless of how the code exists. Use as an alternative to 'finally' statement
@@ -135,7 +145,9 @@ def updatelines():
 #SET itemid = value1, quantity = value2, cost =
 #WHERE lineid =  and orderid = ;
         string = "UPDATE lineitem SET quantity = " +str(qty.get()) + ", cost = "+str(cost)+ " where lineid =" + str(linek) + " and orderid = " + str(orderid) + ";"
-        con = mdb.connect('localhost', 'root', 'CSC436!', 'gameshop');
+        connectionstring = read_db_config()
+        con = mdb.connect(connectionstring.get('host'), connectionstring.get('user'), connectionstring.get('password'),
+                          connectionstring.get('database'))
         try:
             with con:
                 cur = con.cursor()

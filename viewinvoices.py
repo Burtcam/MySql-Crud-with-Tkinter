@@ -2,12 +2,15 @@ from tkinter import *
 from tkinter.ttk import Combobox, Treeview
 import pymysql as mdb
 from Errordialog import *
+from python_mysql_dbconfig import read_db_config
 
 
 
 def getinvoices():
     string = "select * from masterinvoice"
-    con = mdb.connect('localhost', 'root', 'CSC436!', 'gameshop');
+    connectionstring = read_db_config()
+    con = mdb.connect(connectionstring.get('host'), connectionstring.get('user'), connectionstring.get('password'),
+                      connectionstring.get('database'))
 
     # With will close the connection after the code is done,
     # regardless of how the code exists. Use as an alternative to 'finally' statement
@@ -19,7 +22,7 @@ def getinvoices():
         # Returns a tuple of tuples, with each inner tupple being one row
         result = cur.fetchall()
     con.close()
-    print(result)
+    #(result)
     return result
 
 
@@ -28,7 +31,7 @@ def viewinvoices():
     window.title("View Invoices")
 
     result = getinvoices()
-    print(result)
+   # print(result)
     tree = Treeview(window, columns=('Invoice ID', 'Date Logged', 'Payment Due Date', 'Total Due', 'VendorID', 'Paid to Date'), show='headings')
 
     tree.heading('Invoice ID', text="Invoice ID")

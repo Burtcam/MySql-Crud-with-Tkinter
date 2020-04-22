@@ -1,6 +1,8 @@
 from Errordialog import *
 import pymysql as mdb
 from tkinter import *
+from python_mysql_dbconfig import read_db_config
+
 
 def addatermscode():
 
@@ -43,7 +45,9 @@ def addatermscode():
         allowanceamt  = "'" + str(allowance.get()) + "'"
 
         query = "Insert into termscodes (termsID, discount, allowance, daystoearndiscount) VALUES (" + termscodes + "," + discountamt + "," + allowanceamt + "," + daystoearn +");"
-        con = mdb.connect('localhost', 'root', 'CSC436!', 'gameshop');
+        connectionstring = read_db_config()
+        con = mdb.connect(connectionstring.get('host'), connectionstring.get('user'), connectionstring.get('password'),
+                          connectionstring.get('database'))
         try:
             with con:
                 cur = con.cursor()

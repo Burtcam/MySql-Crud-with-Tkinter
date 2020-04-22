@@ -26,9 +26,14 @@ def addvendorbtn():
 def main():
     window = Tk()
 
-    window.title("Welcome to the gameshop system")
+    window.title("Welcome to the LivePlay system")
     window.geometry("640x640")
+    def exit():
+        window.destroy()
 
+    #Basetable management Banner
+    basetbllbl = Label(window, text="Base Table Management", font=("Helvetica", 16))
+    basetbllbl.pack()
 
     #INSERT item
     additembtn = Button(window, text="Add a new item", command=addanitembtn)
@@ -41,6 +46,10 @@ def main():
     #insert terms codes
     inserttermsbtn = Button(window, text = "Insert Terms", command= addatermscode)
     inserttermsbtn.pack()
+
+    # Basetable management Banner
+    invmanglbl = Label(window, text="Inventory Management", font=("Helvetica", 16))
+    invmanglbl.pack()
 
     #insert inventory
     insertinventorybtn = Button(window, text="Putaway Inventory", command=insertinv)
@@ -58,6 +67,10 @@ def main():
     deleteinvbtn = Button(window, text = "Delete Inventory", command = deleteinv)
     deleteinvbtn.pack()
 
+    # Order management Banner
+    ordermanglbl = Label(window, text="Order Management", font=("Helvetica", 16))
+    ordermanglbl.pack()
+
     #insert order
     addorderbtn = Button(window, text ="Add a New Order/Add Lines", command = addorder)
     addorderbtn.pack()
@@ -70,8 +83,12 @@ def main():
     updateordersbtn.pack()
 
     #view Orders
-    updateordersbtn = Button(window, text="View Open Orders", command=openorders)
-    updateordersbtn.pack()
+    openordersbtn = Button(window, text="View Open Orders", command=openorders)
+    openordersbtn.pack()
+
+    # Order management Banner
+    invoicemanglbl = Label(window, text="Invoice Management", font=("Helvetica", 16))
+    invoicemanglbl.pack()
 
     #insertinvoice
     insertinvoicebtn = Button(window, text="Log Invoices", command=insertinvoice)
@@ -84,6 +101,9 @@ def main():
     #payinvoices
     payinvoicebtn = Button(window, text="Pay Invoices", command = payinvoices)
     payinvoicebtn.pack()
+
+    Killmyselfbtn = Button(window, text="Exit", command=exit)
+    Killmyselfbtn.pack()
 
 
     window.mainloop()

@@ -2,13 +2,16 @@ from Errordialog import *
 import pymysql as mdb
 from tkinter import *
 from tkinter.ttk import Combobox
+from python_mysql_dbconfig import read_db_config
 
 
 def getitems():
 
     query = "SELECT itemID FROM masteritem"
 
-    con = mdb.connect('localhost', 'root', 'CSC436!', 'gameshop');
+    connectionstring = read_db_config()
+    con = mdb.connect(connectionstring.get('host'), connectionstring.get('user'), connectionstring.get('password'),
+                      connectionstring.get('database'))
 
     # With will close the connection after the code is done,
     # regardless of how the code exists. Use as an alternative to 'finally' statement
@@ -56,7 +59,9 @@ def insertinv():
         #INSERT into inventory (itemID, onhand, location) VALUES ('I11000', 50, 'loc1')
 
         query = "INSERT into inventory (itemID, onhand, location) VALUES (" + itemid2 + "," + qty + "," + location +");"
-        con = mdb.connect('localhost', 'root', 'CSC436!', 'gameshop');
+        connectionstring = read_db_config()
+        con = mdb.connect(connectionstring.get('host'), connectionstring.get('user'), connectionstring.get('password'),
+                          connectionstring.get('database'))
         try:
             with con:
                 cur = con.cursor()
