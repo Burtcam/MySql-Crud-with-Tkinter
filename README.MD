@@ -29,7 +29,7 @@ These functions will allow a user to manage various functions related to orders.
 - Update order headers in relation to their ship date and receive date
 - See all orders
 
-###Invoice Management
+### Invoice Management
 These functions allow for basic invoice management
 - Log new invoices received from vendors
 - Query All invoices
